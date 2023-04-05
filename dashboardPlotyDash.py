@@ -71,13 +71,15 @@ def get_scatter_chart(entered_site,slider):
 
     filtered_df=spacex_df[(spacex_df['Payload Mass (kg)']>=slider[0])&(spacex_df['Payload Mass (kg)']<slider[1])]
     if entered_site == 'ALL':
-        fig1= px.scatter(filtered_df, x= 'Payload Mass (kg)', y='class', color="Booster Version Category")
+        fig1= px.scatter(filtered_df, x= 'Payload Mass (kg)', y='class', color="Booster Version Category",
+         title='Correlation between success rate and payload mass in all sites')
         return fig1
         
     else:
     # return the outcomes scatter chart for a selected site
         data = filtered_df.loc[filtered_df['Launch Site']== entered_site]
-        fig1= px.scatter(data, x= 'Payload Mass (kg)', y='class', color="Booster Version Category")
+        fig1= px.scatter(data, x= 'Payload Mass (kg)', y='class', color="Booster Version Category",
+        title=f'Correlation between success rate and payload in {entered_site}')
         return fig1
 # Run the app
 if __name__ == '__main__':
