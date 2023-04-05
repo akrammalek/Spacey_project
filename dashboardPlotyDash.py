@@ -57,8 +57,9 @@ def get_pie_chart(entered_site):
     else:
     # return the outcomes piechart for a selected site
     # data=spacex_df.loc[spacex_df['Launch Site'] == entered_site]
-        data=spacex_df.loc[spacex_df['Launch Site'] == entered_site]['class'].value_counts()
-        fig=px.pie(data,values='class',
+        data=spacex_df.loc[spacex_df['Launch Site'] == entered_site]
+        data=data.groupby(['Launch Site', 'class']).size().reset_index(name ='Launch_Class count')
+        fig=px.pie(data,values='Launch_Class count',
         names='class',
         title= f'Success launch for {entered_site}')
         return fig
